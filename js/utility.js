@@ -19,6 +19,19 @@ function randomListGen(volteCheDesidero, numRange) {
 
 
 
+function arrayGen(){
+  let playerNumList = [];
+  const userInput = document.getElementsByClassName("getvalue");
+  for (let i = 0 ; i < userInput.length ; i++){
+
+    playerNumList.push(parseInt(userInput[i].value));
+  }
+      
+  return playerNumList
+
+} 
+
+
 
  
 

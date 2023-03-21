@@ -27,7 +27,7 @@ function startGame() {
 
 // prendo l'elemento dove voglio che la mia lista di numeri random appaia
 
-const printList = document.getElementById('newnums')  ;  
+const printList = document.getElementById('newnums')  ;
 
 // aggiungo il reset della classe hide
 
@@ -48,8 +48,8 @@ let rndmNumList = randomListGen(maxNum, 99);
 // creo un ciclo per inserire in html ad uno ad uno i numero del mio array
 
 for (i = 0; i <= rndmNumList.length; i++){
-    
-    
+
+
 
     printList.innerText = `${rndmNumList}`;
 
@@ -58,11 +58,18 @@ for (i = 0; i <= rndmNumList.length; i++){
 
 // adesso ho bisogno di nascondere i numeri appena apparsi in automatico dopo tot secondi
 
-setTimeout(hide, 10000)
+setTimeout(hide, 5000)
 
     function hide(){
 
     printList.classList.add('hide');
+
+    let formShow = document.querySelector('.formwrapper');
+
+    formShow.classList.remove('d-none');
+
+
+
 
 }
 
@@ -77,54 +84,46 @@ userNum.addEventListener('submit', checkStart);
 
 // creo una funzione che prende i numeri inseriti dall'utente e li confronta con i numeri random dentro array
 
-function checkStart(e){
+    function checkStart(e){
 
 
 
-    e.preventDefault();   
-    
-    let playerNumList = [];
-    
-    // creo ulteriore funzione che mi aggiunge per ogni input il suo valore dentro un array
-    
-    function arrayGen(){
-        const userInput = document.getElementsByClassName("getvalue");
-        for (let i = 0 ; i < userInput.length ; i++){
-    
-                playerNumList.push(userInput[i].value);
+        e.preventDefault();
+
+
+
+        // creo ulteriore funzione che mi aggiunge per ogni input il suo valore dentro un array
+        // spostata in utility 
+
+        let playerNumList = arrayGen();
+
+        // devo comparare i numeri dentro gli array creati
+
+
+        let matchNumber = [];
+
+        const rightGuess = document.getElementById('right');
+        const numbFound = document.getElementById('numfound');
+
+
+        // creo un ciclo che per ogni elemento dell'array playerNUmList incluso nell 'array rndNumList lo inserisce dentro il nuovo array
+        for (let num of playerNumList){
+            console.log(num);
+            if(rndmNumList.includes(num)){
+
+                matchNumber.push(num);
             }
-     
+
         }
-    
-        arrayGen();
-
-    // devo comparare i numeri dentro gli array creati secondo il loro indice
-
-
-    for (let i = 0 ; i < playerNumList.length ; i++){
-
-        if (parseInt(playerNumList[i]) ===  parseInt(rndmNumList[i])) {
-
-            console.log('ok');
-
-        } else {
-
-            console.log('nope');
-        }
-    
+        // printo il risultato del mio array in html
+        rightGuess.innerText = `you got right ${matchNumber.length} out of 5 `;
+        numbFound.innerText = `your numbers : ${matchNumber}`
+        console.log(matchNumber);
+        console.log(matchNumber.length);
 
 
-    
+
     }
-        
-    
-    
-    
-        console.log(playerNumList);
-    }
-    
-   
-
 
 
 
@@ -141,11 +140,21 @@ function checkStart(e){
 
 
 
-    
 
 
 
-   
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
